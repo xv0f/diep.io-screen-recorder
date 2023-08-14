@@ -2,7 +2,7 @@
 // @name         Diep.io Screen Recorder
 // @namespace    https://github.com/xv0f/
 // @version      1.0.0
-// @description  Lightweight screen recorder for diep.io (or for anything else); press "z" to toggle.
+// @description  Lightweight screen recorder that records the canvas in diep.io. Press "z" to toggle or change the settings at the very top of the script.
 // @author       xv0f
 // @match        *://diep.io/*
 // @icon         https://diep.io/898d2001b20a8386a610.png
