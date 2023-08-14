@@ -6,6 +6,7 @@
 // @author       xv0f
 // @match        *://diep.io/*
 // @icon         https://diep.io/898d2001b20a8386a610.png
+// @license      MIT
 // @grant        none
 // ==/UserScript==
 
