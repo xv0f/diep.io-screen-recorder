@@ -10,44 +10,48 @@
 // ==/UserScript==
 
 const SETTINGS = {
-	toggle: "z",
-	fps: 30
+  toggle: "z",
+  fps: 30
 }
 
 !(async () => {
-	while (!document.getElementById("canvas")) await new Promise(res => setTimeout(res, 100));
+  while (!document.getElementById("canvas")) await new Promise(res => setTimeout(res, 100));
 
-	let toggle = false, recorder = null, chunks = [];
+  let toggle = false,
+    recorder = null,
+    chunks = [];
 
-	document.addEventListener("keydown", ({ key }) => {
-		if (key == SETTINGS.toggle) {
-			toggle = !toggle;
+  document.addEventListener("keydown", ({ key }) => {
+    if (key == SETTINGS.toggle) {
+      toggle = !toggle;
 
-			if (toggle) {
-				recorder = new MediaRecorder(
-					document.getElementById("canvas").captureStream(SETTINGS.fps),
-					{ mimeType: "video/webm; codecs=vp9" }
-				);
+      if (toggle) {
+        recorder = new MediaRecorder(
+          document.getElementById("canvas").captureStream(SETTINGS.fps),
+          { mimeType: "video/webm; codecs=vp9" }
+        );
 
-				recorder.ondataavailable = ({ data }) => chunks.push(data);
+        recorder.ondataavailable = ({
+          data
+        }) => chunks.push(data);
 
-				recorder.onstop = () => {
-					const blob = new Blob(chunks, { type: "video/webm" });
-					const url = URL.createObjectURL(blob);
-					const element = document.createElement("a");
+        recorder.onstop = () => {
+          const blob = new Blob(chunks, { type: "video/webm" });
+          const url = URL.createObjectURL(blob);
+          const element = document.createElement("a");
 
-					element.download = "diep.io-recording.webm";
-					element.href = url;
+          element.download = "diep.io-recording.webm";
+          element.href = url;
 
-					element.click();
-				}
+          element.click();
+        }
 
-				recorder.start();
-			} else {
-				recorder.stop();
-				recorder = null;
-				chunks = [];
-			}
-		}
-	});
+        recorder.start();
+      } else {
+        recorder.stop();
+        recorder = null;
+        chunks = [];
+      }
+    }
+  });
 })();
