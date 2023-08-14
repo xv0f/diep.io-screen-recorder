@@ -31,9 +31,7 @@ const SETTINGS = {
           { mimeType: "video/webm; codecs=vp9" }
         );
 
-        recorder.ondataavailable = ({
-          data
-        }) => chunks.push(data);
+        recorder.ondataavailable = ({ data }) => chunks.push(data);
 
         recorder.onstop = () => {
           const blob = new Blob(chunks, { type: "video/webm" });
